@@ -1,16 +1,23 @@
-// src/App.tsx
-import React from 'react';
+import React, { useState } from 'react'; // Adicionado import do useState
 import Header from './Header';
-import Container from './Container';
+import Form from './Form';
+import OverlayForm from './OverlayForm';
 import Footer from './Footer';
-import './styles.css'; 
+import './style.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const App: React.FC = () => {
+  const [isSignUp, setIsSignUp] = useState(false);
+
   return (
     <div className="App">
       <Header />
-      <Container />
+      <div className='centralizacao'>
+        <div className={`container ${isSignUp ? 'right-panel-active' : ''}`}>
+      <Form isSignUp={isSignUp} onSignUp={() => setIsSignUp(true)} onSignIn={() => setIsSignUp(false)} />
+      <OverlayForm isSignUp={isSignUp} onSignUp={() => setIsSignUp(true)} onSignIn={() => setIsSignUp(false)} />
+        </div>
+      </div>
       <Footer />
     </div>
   );
