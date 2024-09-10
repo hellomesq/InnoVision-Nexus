@@ -1,25 +1,20 @@
-import React, { useState } from 'react'; // Adicionado import do useState
-import Header from './Header';
-import Form from './Form';
-import OverlayForm from './OverlayForm';
-import Footer from './Footer';
-import './style.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './Global/Header';
+import Footer from './Global/Footer';
+import AuthPage from './FormsLogin/AuthPage';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const App: React.FC = () => {
-  const [isSignUp, setIsSignUp] = useState(false);
-
   return (
-    <div className="App">
+    <Router>
       <Header />
-      <div className='centralizacao'>
-        <div className={`container ${isSignUp ? 'right-panel-active' : ''}`}>
-      <Form isSignUp={isSignUp} onSignUp={() => setIsSignUp(true)} onSignIn={() => setIsSignUp(false)} />
-      <OverlayForm isSignUp={isSignUp} onSignUp={() => setIsSignUp(true)} onSignIn={() => setIsSignUp(false)} />
-        </div>
-      </div>
+        <Routes>
+          <Route path="/" element={<AuthPage />} />
+          <Route path="/sign-up" element={<AuthPage />} />
+        </Routes>
       <Footer />
-    </div>
+    </Router>
   );
 }
 
