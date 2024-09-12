@@ -1,9 +1,9 @@
 import React from 'react';
-import './home.css'; // Importando o arquivo CSS externo
+import './home.css'; 
 
 const AboutUs: React.FC = () => {
   return (
-    <div className="container">
+    <div className="container-topics">
       <div className="half-circle">
         <div className="card-wrapper">
           <div className="card">

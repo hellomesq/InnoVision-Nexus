@@ -92,7 +92,7 @@ button:hover {
 
 /*SOBRE NÓS*/
 
-.container {
+.container-topics {
   display: flex;
   height: 100vh;
   overflow: hidden;
