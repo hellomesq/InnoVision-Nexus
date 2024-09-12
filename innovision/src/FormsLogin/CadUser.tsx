@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './forms.css';
+import './forms.css' /* obs: esta bugado a estilização*/
 
 const CadUser: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false); 

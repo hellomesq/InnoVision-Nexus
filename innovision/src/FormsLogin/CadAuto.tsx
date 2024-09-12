@@ -1,5 +1,5 @@
 import React from 'react';
-import './forms.css';
+import './forms.css'; /* obs: esta bugado a estilização*/
 
 const CadAuto: React.FC = () => {
   return (
