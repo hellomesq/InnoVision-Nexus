@@ -1,5 +1,6 @@
 // Form.tsx
 import React from 'react';
+import './forms.css';
 
 const Form: React.FC<{ isSignUp: boolean }> = ({ isSignUp }) => {
   return (

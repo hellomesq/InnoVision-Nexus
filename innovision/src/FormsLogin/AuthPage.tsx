@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Form from './Form';
 import OverlayForm from './OverlayForm';
+import './forms.css';
 
 const AuthPage: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);

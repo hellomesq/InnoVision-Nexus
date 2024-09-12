@@ -1,4 +1,5 @@
 import React from 'react';
+import './forms.css';
 
 const OverlayForm: React.FC<{ isSignUp: boolean, onSignUp: () => void, onSignIn: () => void }> = ({onSignUp, onSignIn }) => {
     return (
