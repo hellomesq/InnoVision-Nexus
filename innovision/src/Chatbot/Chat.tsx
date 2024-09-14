@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './chat.css';
 
 const Chat: React.FC = () => {
@@ -10,9 +11,11 @@ const Chat: React.FC = () => {
                         <h2 className="user-name">Charles</h2>
                         <p className="user-role">Auto atendimento</p>
                     </div>
-                    <a href="../servicos/servicos.html">
-                        <button className="logout-button">Sair</button>
-                    </a>
+                    <Link to="/services">
+                    <button className="logout-button">Sair</button>
+                    </Link>
+                       
+                  
                 </div>
             </nav>
             <main className="container-chat">

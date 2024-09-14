@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import './forms.css' 
+import { useNavigate } from 'react-router-dom';
+import './forms.css';
 
 const CadUser: React.FC = () => {
-  const [isSignUp, setIsSignUp] = useState(false); 
-
+  const [isSignUp, setIsSignUp] = useState(false);
+  const navigate = useNavigate();
   const handleSignUp = () => {
     setIsSignUp(true);
   };
@@ -12,23 +13,33 @@ const CadUser: React.FC = () => {
     setIsSignUp(false);
   };
 
+  const handleSubmit = (path: string) => {
+    navigate(path);
+  };
+
   return (
     <div className="centralizacao">
       <div className={`container ${isSignUp ? 'right-panel-active' : ''}`}>
         <div className={`form-container sign-up-container ${isSignUp ? 'active' : ''}`}>
-          <form>
+          <form className='forms-cad'>
             <h1 className='title-forms'>Seja bem-vindo(a)</h1><br />
-            <input type="text" placeholder="Usuário" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Senha" />
-            <button className="btn-primary" type="button">Cadastrar-se</button>
+            <input type="text" className='input-cad' placeholder="Usuário" />
+            <input type="email" className='input-cad' placeholder="Email" />
+            <input type="password" className='input-cad' placeholder="Senha" />
+            <button
+              className="btn-primary"
+              type="button"
+              onClick={() => handleSubmit('/cad-auto')}
+            >
+              Cadastrar-se
+            </button>
           </form>
         </div>
         <div className={`form-container sign-in-container ${!isSignUp ? 'active' : ''}`}>
-          <form>
+          <form className='forms-cad'>
             <h1 className='title-forms'>Bem-vindo(a) de volta!</h1><br />
-            <input type="text" placeholder="Usuário" />
-            <input type="password" placeholder="Senha" />
+            <input type="text" className='input-cad' placeholder="Usuário" />
+            <input type="password" className='input-cad' placeholder="Senha" />
             <a id="link-title" href="#">Esqueci minha senha</a>
             <button className="btn-primary" type="button">Login</button>
           </form>

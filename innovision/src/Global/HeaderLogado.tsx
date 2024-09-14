@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './global.css'
 
-const Header: React.FC = () => {
+const HeaderLogado: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Função para alternar o estado do menu móvel
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -17,18 +17,17 @@ const Header: React.FC = () => {
         </Link>
         <ul id="nav_list">
           <li className="nav_item"><Link to="/">Home</Link></li>
-          <li className="nav_item"><Link to="/login">Login</Link></li>
+          <li className="nav_item"><Link to="/login">Perfil</Link></li>
           <li className="nav_item"><Link to="/services">Serviços</Link></li>
         </ul>
-        {/* Adiciona a classe 'active' ao botão quando o menu estiver aberto */}
-        <button id="mobile_btn" onClick={toggleMobileMenu} className={isMobileMenuOpen ? 'active' : ''}>
+        <button id="mobile_btn" onClick={toggleMobileMenu}>
           <i className="fas fa-bars"></i>
         </button>
       </nav>
       <div id="mobile_menu" className={isMobileMenuOpen ? 'active' : ''}>
         <ul id="mobile_nav_list">
           <li className="nav_item"><Link to="/">Home</Link></li>
-          <li className="nav_item"><Link to="/login">Login</Link></li>
+          <li className="nav_item"><Link to="/login">Perfil</Link></li>
           <li className="nav_item"><Link to="/services">Serviços</Link></li>
         </ul>
       </div>
@@ -36,4 +35,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default HeaderLogado;

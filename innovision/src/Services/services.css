@@ -41,11 +41,11 @@
 }
 
 .card-services {
-    border: 2px solid rgba(0, 0, 0, 0.288);
+    
     border-radius: 8px;
     text-align: center;
     color: #212121;
-    box-shadow: 0 2px 5px 0 rgba(#000, .2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.295);
     transition: all .2s;
     overflow: hidden;
     height: 340px;
@@ -87,7 +87,7 @@
     line-height: 1.3;
 }
 
-.btn-services-card{
+.btn-services-card {
     background: var(--degrade);
     line-height: 2;
     padding: 0 1.5em;
@@ -102,7 +102,6 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* Centraliza o texto horizontalmente */
 }
 
 .convitechat h4 {
@@ -110,7 +109,6 @@
     font-weight: normal;
     word-wrap: break-word;
     max-width: 90%;
-    /* Limita a largura do texto para quebrar em telas menores */
 }
 
 .assistente {
@@ -143,10 +141,85 @@
 
 
 /*PERFIL COM HISTÓRICO DE MANUTENÇÃO*/
-.container-title {
+
+/* Estilização geral do dashboard */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Menu lateral */
+.sidebar {
+    width: 250px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    padding: 3rem 0;
+    position: fixed;
+    top: 2.5rem;
+    left: 0;
+    text-align: center;
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 20px;
+    text-align: left;
+}
+
+.sidebar-menu li {
+    margin: 15px 0;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+/* Conteúdo principal */
+.main-container {
+    margin-left: 250px;
+    width: calc(100% - 250px);
     display: flex;
     flex-direction: column;
-    padding: 4.5rem 0 0 8rem;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+.container-title {
+    margin-top: 5rem;
+    text-align: center;
 }
 
 .title-perfil {
@@ -158,8 +231,23 @@
 }
 
 .title-perfil p {
-    text-transform: none;
-    color: rgb(87, 86, 86);
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #333;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 0 15px;
+}
+
+.title-perfil p::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--border);
+    margin: 10px auto;
 }
 
 .filter-container {
@@ -177,25 +265,20 @@
 
 .filter-btn i {
     font-size: 1.2rem;
+    color: black;
 }
 
 .container-table {
     width: 80%;
     display: flex;
     flex-direction: column;
-    /* Garantir que os elementos sejam empilhados verticalmente */
     align-items: center;
-    /* Centralizar horizontalmente */
     justify-content: center;
-    /* Centralizar verticalmente */
     padding: 20px 20px;
-    /* Espaçamento interno para dar respiro */
     margin: 20px auto;
-    background: rgb(241, 241, 241);
+    background: rgba(234, 234, 240, 0.452); 
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    /* Sombra leve para dar profundidade */
     border-radius: 8px;
-    /* Bordas arredondadas para suavidade */
 }
 
 .filter-container {
@@ -203,9 +286,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    /* Ajusta o filtro à largura do contêiner */
     margin-bottom: 1rem;
-    /* Espaçamento abaixo do filtro */
 }
 
 .filter-container h1 {
@@ -237,84 +318,59 @@
 
 #filter-form-container {
     position: absolute;
-    /* Posiciona o container de forma absoluta */
     width: 18%;
-    /* Largura do container */
     right: 5px;
-    /* Distância do lado direito */
     top: 50px;
-    /* Distância do topo (ajuste conforme necessário) */
     background-color: white;
-    /* Cor de fundo branca */
     border-radius: 8px;
-    /* Bordas arredondadas */
     padding: 12px;
-    /* Espaçamento interno */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Sombra para profundidade */
     z-index: 10;
-    /* Coloca o container acima da tabela e outros elementos */
 }
 
-/* Ajusta o contêiner da tabela para garantir que o filtro se sobreponha corretamente */
 .container-table {
     position: relative;
-    /* Define o container como relativo para o posicionamento absoluto do filtro */
 }
 
-/* Estilo para o botão de filtro */
 .filter-btn {
     position: relative;
-    /* Define o botão de filtro como relativo */
 }
 
-/* Estilo para o formulário de filtro */
 #filter-form {
     display: flex;
     flex-direction: column;
-    /* Layout em coluna */
 }
 
 #filter-form label {
     margin-bottom: 8px;
-    /* Espaçamento abaixo dos rótulos */
     font-weight: bold;
-    /* Texto em negrito */
 }
 
 #filter-form input,
 #filter-form select {
     margin-bottom: 16px;
-    /* Espaçamento abaixo dos campos de entrada */
     padding: 8px;
-    /* Espaçamento interno */
     border: 1px solid #ccc;
-    /* Borda cinza clara */
     border-radius: 4px;
-    /* Bordas arredondadas */
 }
 
 /* Estilo para o botão aplicar filtro */
 #filter-form button {
     padding: 10px 20px;
-    /* Espaçamento interno */
-    background-color: #007bff;
-    /* Cor de fundo azul */
+    background: linear-gradient(35deg,
+            #8685be 0%,
+            #2d2a86 30%,
+            #a55c54 76%,
+            #9b4620 90%);
     color: white;
-    /* Cor do texto */
     border: none;
-    /* Sem borda */
     border-radius: 4px;
-    /* Bordas arredondadas */
     cursor: pointer;
-    /* Cursor de ponteiro */
     font-size: 16px;
-    /* Tamanho da fonte */
 }
 
 #filter-form button:hover {
     background-color: #0056b3;
-    /* Cor de fundo azul escuro no hover */
 }
 
 /* Estilo geral para os cartões de manutenção */
@@ -322,47 +378,33 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    /* Espaçamento entre os cartões */
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    /* Centraliza os cartões horizontalmente */
     padding: 0 10px;
-    /* Espaçamento horizontal */
 }
 
 /* Estilo para cada cartão */
 .repair-card {
     background: #ffffff;
-    /* Cor de fundo branca */
     border-radius: 8px;
-    /* Bordas arredondadas */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Sombra leve para profundidade */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.11);
     padding: 16px;
-    /* Espaçamento interno */
-    border: 1px solid #ddd;
-    /* Borda leve */
+    border: none;
 }
 
 /* Estilo para os títulos dos cartões */
 .repair-card h2 {
     margin-top: 0;
-    /* Remove a margem superior */
     font-size: 1.2rem;
-    /* Tamanho da fonte */
     color: #333;
-    /* Cor do texto */
 }
 
 /* Estilo para os parágrafos dentro dos cartões */
 .repair-card p {
     margin: 8px 0;
-    /* Espaçamento entre parágrafos */
     font-size: 1rem;
-    /* Tamanho da fonte */
     color: #555;
-    /* Cor do texto */
 }
 
 /* Media Queries para responsividade */
@@ -371,14 +413,12 @@
 @media (max-width: 1024px) {
     .repair-table {
         display: none;
-        /* Oculta a tabela em telas menores */
     }
 
     .repair-cards {
         display: flex;
         flex-direction: column;
         gap: 16px;
-        /* Espaçamento entre os cartões */
         width: 100%;
         max-width: 1200px;
         margin: 0 auto;
@@ -390,21 +430,17 @@
 @media (max-width: 768px) {
     .repair-cards {
         padding: 0;
-        /* Remove o espaçamento horizontal */
     }
 
     .repair-card {
         padding: 12px;
-        /* Ajusta o espaçamento interno */
     }
 
     .repair-card h2 {
         font-size: 1rem;
-        /* Ajusta o tamanho da fonte */
     }
 
     .repair-card p {
         font-size: 0.9rem;
-        /* Ajusta o tamanho da fonte */
     }
 }

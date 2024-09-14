@@ -78,14 +78,10 @@
     cursor: pointer;
 }
 
-main {
+.container-chat {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.container-chat {
-    display: flex;
     flex-direction: column;
     max-width: 648px;
     width: 100%;
