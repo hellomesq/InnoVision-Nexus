@@ -6,6 +6,7 @@ import CadUser from './FormsLogin/CadUser';
 import CadAuto from './FormsLogin/CadAuto';
 import Services from './Services/Services';
 import Perfil from './Services/Perfil';
+import AlterarPerfil from './Services/AlterarPerfi';
 import HeaderLogado from './Global/HeaderLogado';
 import Chat from './Chatbot/Chat';
 import Footer from './Global/Footer';
@@ -61,6 +62,16 @@ const App: React.FC = () => {
             <>
               <HeaderLogado />
               <Perfil />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/alterarperfil"
+          element={
+            <>
+              <HeaderLogado />
+              <AlterarPerfil />
               <Footer />
             </>
           }
