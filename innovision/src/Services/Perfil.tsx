@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './services.css';
 
 interface Repair {
@@ -32,9 +33,9 @@ const Dashboard: React.FC = () => {
           <p>@usuario</p>
         </div>
         <ul className="sidebar-menu">
-          <li><a href="#alterar-perfil">Alterar Perfil</a></li>
-          <li><a  href="#alterar-perfil">Chat</a></li>
-          <li><a id='teste' href="#sair">Sair</a></li>
+        <li className="perfil"><a href="#">Perfil</a></li>
+          <li><Link to="/chat">Chat</Link></li>
+          <li><Link to="/">Sair</Link></li>
         </ul>
       </nav>
       <div className="main-container">

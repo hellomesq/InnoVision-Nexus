@@ -200,9 +200,15 @@
     border: 0;
 }
 
-.submit-chat {
-    font-size: 30px;
+.submit-chat{
+    
     background-color: transparent;
     border: none;
     cursor: pointer;
+    
+}
+
+.submit-chat i{
+    color: black;
+    font-size: 30px;
 }

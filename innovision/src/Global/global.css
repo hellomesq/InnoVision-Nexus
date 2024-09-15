@@ -23,8 +23,8 @@
     --border: linear-gradient(
         90deg,  
         #FBFCFE 10%, 
-        #0D16FF 73%, 
-        #3b32ad 98%
+        #080c81 73%, 
+        #110c53 98%
     );
     --eclipse: linear-gradient(30deg, 
     #b6bafe -2.52%, 
@@ -32,6 +32,11 @@
     #0b0f7b 60.38%, 
     #0a080e 89.51%
     );
+    --secondgradient: linear-gradient(35deg,
+    #1440d3 0%,
+    #100d6d 30%,
+    #803232 76%,
+    #b64428 90%);
 }
 
 /* NAVBAR */
