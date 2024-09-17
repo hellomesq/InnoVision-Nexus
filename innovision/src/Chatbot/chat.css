@@ -7,15 +7,10 @@
 
 .content-chat {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin: 20px;
-}
-
-@media (max-width: 991px) {
-    .content-chat {
-        padding: 20px 20px;
-    }
+    justify-content: center;
+    margin: 1rem;
 }
 
 .nav-chat {
@@ -25,13 +20,6 @@
     width: 100%;
     max-width: 1236px;
     gap: 20px;
-}
-
-@media (max-width: 991px) {
-    .nav-chat {
-        max-width: 100%;
-        flex-wrap: wrap;
-    }
 }
 
 .user-info {
@@ -80,14 +68,15 @@
 
 .container-chat {
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     max-width: 648px;
     width: 100%;
     border-radius: 10px;
     margin: 0 auto;
-    margin-top: 12%;
+    margin-top: 10%;
+
 }
 
 .message-section {
@@ -113,14 +102,6 @@
     padding: 10px 14px;
 }
 
-@media (max-width: 991px) {
-    .message {
-        padding-right: 20px;
-    }
-    .message-section{
-        flex-direction: row;
-    }
-}
 
 .options-chat {
     display: flex;
@@ -128,7 +109,7 @@
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.28px;
-    justify-content: left;
+    justify-content: center;
     margin: 1rem 3.5rem;
     flex-wrap: wrap;
 }
@@ -144,17 +125,6 @@
     background-color: rgba(134, 153, 171, 0.637);
 }
 
-@media (max-width: 991px) {
-    .option-chat {
-        padding: 10px 17px;
-    }
-
-    .container-chat {
-        margin-top: 10rem;
-    }
-}
-
-/* Rodapé do chat */
 .footer-chat {
     box-shadow: 0px -4px 18.8px 0px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
@@ -166,9 +136,7 @@
     position: fixed;
     bottom: 1.5rem;
     width: 80%;
-    /* Ajuste conforme necessário */
     max-width: 800px;
-    /* Ajuste conforme necessário */
     left: 50%;
     transform: translateX(-50%);
 }
@@ -200,15 +168,36 @@
     border: 0;
 }
 
-.submit-chat{
-    
+.submit-chat {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    
 }
 
-.submit-chat i{
+.submit-chat i {
     color: black;
     font-size: 30px;
+}
+
+@media (max-width: 991px) {
+    .nav-chat {
+        max-width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .message-section {
+        flex-direction: row;
+    }
+
+    .options-chat {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin: 1rem 0;
+    }
+
+    .container-chat {
+        margin-top: 10rem;
+    }
+
 }

@@ -141,25 +141,23 @@
 
 /*PERFIL COM HISTÓRICO DE MANUTENÇÃO*/
 
-/* Estilização geral do dashboard */
 .dashboard {
     display: flex;
     min-height: 100vh;
 }
 
-/* Menu lateral */
 .sidebar {
     width: 250px;
-    background: white;
+    background-color: white;
     height: 100vh;
     padding-top: 3rem;
     box-sizing: border-box;
     position: fixed;
-    top: 2.5rem;
+    top: 0;
     left: 0;
     text-align: center;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-    border-radius: 12px;
+    transition: transform 0.3s ease;
 }
 
 .sidebar-header h2 {
@@ -173,24 +171,19 @@
     padding: 0;
     margin: 30px 0;
     text-align: left;
-
 }
 
 .sidebar-menu li {
-    padding: 10px 10px;
-    margin: 15px;
-    list-style-type: none;
+    padding: 10px;
 }
 
 .sidebar-menu li.perfil {
     position: relative;
     background: var(--secondgradient);
-    width: 95%;
     border-radius: 10px;
     color: white;
     padding: 6px 10px;
     cursor: pointer;
-    transition: background-color .5s;
 }
 
 .sidebar-menu a {
@@ -204,6 +197,68 @@
     color: white;
 }
 
+.sidebar-toggle {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 1170px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 80%;
+        position: fixed;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.932);
+        z-index: 1000;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .sidebar-toggle {
+        display: block;
+        position: fixed;
+        top: 40px;
+        left: 20px;
+        z-index: 1100;
+    }
+
+    .sidebar-toggle i {
+        color: rgb(138, 136, 136);
+        font-size: 1.2rem;
+    }
+
+    .sidebar-header h2 {
+        color: white;
+    }
+
+    .sidebar-header p {
+        color: rgb(207, 206, 206);
+    }
+
+    .sidebar-menu a {
+        margin: 10px;
+        color: white;
+    }
+
+    .main-container {
+        margin-left: 0;
+        width: 100%;
+        transition: filter 0.3s ease;
+    }
+
+    .sidebar.active~.main-container {
+        filter: blur(4px);
+    }
+}
+
 /* Conteúdo principal */
 .main-container {
     background-color: #f4f4f4;
@@ -211,6 +266,7 @@
     width: calc(100% - 250px);
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 .content {
@@ -221,26 +277,8 @@
     padding: 20px;
 }
 
-@media (max-width: 768px) {
-    .dashboard {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        border-right: none;
-    }
-
-    .main-content {
-        margin-left: 0;
-        width: 100%;
-    }
-}
-
 .container-title {
-    margin-top: 5rem;
+    margin-top: 4rem;
     text-align: center;
 }
 
@@ -419,30 +457,36 @@
 }
 
 /* MOBILE */
-
 @media (max-width: 1024px) {
-    .repair-table {
-        display: none;
+    .main-container {
+        margin-left: 0;
+        width: 100%;
     }
 
-    .repair-cards {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 10px;
+    .content {
+        padding: 10px;
+    }
+
+    .container-table {
+        width: 90%;
+        padding: 15px;
     }
 }
 
+
 @media (max-width: 768px) {
-    .repair-cards {
-        padding: 0;
+
+    .container-title {
+        margin-top: 4.8rem;
+    }
+
+    .title-perfil p {
+        font-size: 1rem;
+        padding: 0 10px;
     }
 
     .repair-card {
-        padding: 12px;
+        padding: 10px;
     }
 
     .repair-card h2 {
@@ -452,9 +496,15 @@
     .repair-card p {
         font-size: 0.9rem;
     }
+
+    .container-table {
+        width: 100%;
+        padding: 10px;
+    }
 }
 
 /* Alterar Perfil */
+
 .main-container-perfil {
     margin-left: 250px;
     flex: 1;
@@ -468,6 +518,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 5.5rem 2rem;
     height: 100vh;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .form-group {
@@ -535,7 +587,7 @@
 }
 
 .delete-btn {
-    background-color:  #8d1a1a;
+    background-color: #8d1a1a;
 }
 
 .delete-btn:hover {
@@ -557,4 +609,49 @@
 .car-info p {
     font-size: 16px;
     margin-bottom: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .main-container-perfil {
+        margin-left: 0;
+        padding: 0 10px;
+    }
+
+    .form-container-alter {
+        padding: 3rem 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container-perfil {
+        margin-left: 0;
+        padding: 0 10px;
+        margin-top: 3rem;
+    }
+
+    .form-container-alter {
+        padding: 2rem 1rem;
+        height: auto;
+    }
+
+    .form-group h2 {
+        font-size: 1rem;
+    }
+
+    .form-group input {
+        padding: 8px;
+    }
+
+    .btn-alter-perfil button {
+        font-size: 14px;
+    }
+
+    .car-info h2 {
+        font-size: 1rem;
+    }
+
+    .car-info p {
+        font-size: 14px;
+    }
 }

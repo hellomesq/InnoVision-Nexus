@@ -5,8 +5,10 @@ import ConfirmationDialog from '../Global/ConfirmationDialog';
 import './services.css';
 
 const AlterarPerfil: React.FC = () => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [user, setUser] = useState<{ username: string, email: string, password: string } | null>(null);
     const [car, setCar] = useState<{ model: string, chassis: string, plate: string, color: string } | null>(null);
+
     const [newUsername, setNewUsername] = useState('');
     const [newEmail, setNewEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -35,10 +37,10 @@ const AlterarPerfil: React.FC = () => {
         if (user) {
             const updatedUser = { username: newUsername, email: newEmail, password: newPassword || user.password };
             localStorage.setItem('user', JSON.stringify(updatedUser));
-    
+
             // Atualiza o estado local para refletir a mudança imediata no componente
             setUser(updatedUser);
-            
+
             setAlert({ message: 'Perfil atualizado com sucesso!', type: 'success' });
         }
     };
@@ -80,7 +82,10 @@ const AlterarPerfil: React.FC = () => {
 
     return (
         <div className="dashboard">
-            <nav className="sidebar">
+            <button className="sidebar-toggle" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                <i className="fas fa-bars"></i>
+            </button>
+            <nav className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
                 <div className="sidebar-header">
                     <h2>Olá</h2>
                     <p>@{user?.username || 'Usuário'}</p>

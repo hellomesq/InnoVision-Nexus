@@ -87,7 +87,6 @@ header {
     display: none;
 }
 
-
 /* VERSÃO MOBILE */
 @media screen and (max-width: 1170px) {
     header {
@@ -112,7 +111,7 @@ header {
 
     #mobile_btn i {
         font-size: 12px;
-        color: rgb(0, 0, 0);
+        color: rgb(138, 136, 136);
         transition: color 0.3s ease;
     }
 
@@ -138,7 +137,6 @@ header {
         flex-direction: column;
         height: 100vh;
         background: rgba(0, 0, 0, 0.932);
-        /* Fundo escuro com transparência */
         justify-content: space-around;
         transform: translateX(10%);
     }
@@ -153,6 +151,7 @@ header {
     .nav_item a {
         color: white;
     }
+
 }
 
 
@@ -167,13 +166,13 @@ header {
     color: rgba(255, 255, 255, 0.59);
     font-weight: 600;
     justify-content: center;
-    padding: 20px 60px;
+    padding: 1rem 60px;
     width: 100%;
 }
 
 .conteudo__footer {
     display: flex;
-    margin-top: 4px;
+    margin: 0.8rem;
     width: 315px;
     max-width: 100%;
     flex-direction: column;
@@ -184,10 +183,12 @@ header {
     object-fit: auto;
     object-position: center;
     width: 80%;
+    margin-bottom: 10px;
 }
 
 .integrantes__footer {
-    margin-top: 30px;
+    margin-bottom: 0.8rem;
+
 }
 
 .integrantes__footer a {
@@ -297,4 +298,102 @@ header {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* PÁGINA DOS INTEGRANTES */
+
+/* Centraliza o título na tela */
+.title__int {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+    text-align: center;
+}
+
+/* Estiliza o título com um gradiente e centraliza */
+.title__int h2 {
+    background: linear-gradient(
+        90deg,
+        #231838 0%,
+        #534274 13%,
+        #322846 27.5%,
+        #2e2541 43.5%,
+        #492d39 58.5%,
+        #653631 76%,
+        #9b4620 90%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    max-width: 551px;
+    font-size: 25px;
+}
+
+/* Estiliza o link dentro do título */
+.title__int a {
+    font-size: 1rem;
+    text-decoration: none;
+    font-weight: lighter;
+    color: rgb(0, 0, 0);
+}
+
+/* Estiliza o ícone dentro do título */
+.title__int i {
+    font-size: 1.2rem;
+    color: black;
+    margin: 10px;
+}
+
+/* Centraliza o container de perfis horizontalmente */
+.container-profile {
+    max-width: 538px;
+    padding-bottom: 27px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Adiciona esta linha para centralizar os itens em coluna */
+}
+
+/* Estiliza a lista de perfis */
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Estiliza cada perfil dentro da lista de perfis */
+.profile-column {
+    display: flex;
+    gap: 20px;
+    align-items: center; /* Alinha itens no centro verticalmente */
+}
+
+/* Estiliza as imagens de perfil */
+.profile-image {
+    object-fit: cover;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+/* Estiliza os detalhes do perfil */
+.details {
+    font-size: 16px;
+    color: #000;
+    margin-top: 10px;
+}
+
+/* Adiciona padding aos detalhes e ao RM */
+.details,
+.rm {
+    padding: 15px 0;
+}
+
+/* Estiliza links de perfil */
+.details,
+.github-link {
+    text-decoration: none;
+    color: black;
 }

@@ -10,6 +10,7 @@ import AlterarPerfil from './Services/AlterarPerfi';
 import HeaderLogado from './Global/HeaderLogado';
 import Chat from './Chatbot/Chat';
 import Footer from './Global/Footer';
+import Integrantes from './Global/Integrantes';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const App: React.FC = () => {
@@ -76,6 +77,17 @@ const App: React.FC = () => {
             </>
           }
         />
+        <Route
+          path="/integrantes"
+          element={
+            <>
+              <Header />
+              <Integrantes />
+              <Footer />
+            </>
+          }
+        />
+
         <Route path="/chat" element={<Chat />} />
       </Routes>
     </Router>

@@ -19,6 +19,7 @@ const Perfil: React.FC = () => {
   const [dateFilter, setDateFilter] = useState('');
   const [problemFilter, setProblemFilter] = useState('');
   const [user, setUser] = useState<{ username: string } | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,11 +31,10 @@ const Perfil: React.FC = () => {
       setUser(userData);
     }
 
-    // Aqui vamos forçar a verificação no localStorage a cada vez que o componente for renderizado
     const intervalId = setInterval(() => {
       const updatedUser = JSON.parse(localStorage.getItem('user') || '{}');
       setUser(updatedUser);
-    }, 1000); // Verifica a cada 1 segundo, pode ajustar esse tempo
+    }, 1000);
 
     return () => clearInterval(intervalId);
   }, [navigate]);
@@ -45,10 +45,12 @@ const Perfil: React.FC = () => {
     return matchesDate && matchesProblem;
   });
 
-
   return (
     <div className="dashboard">
-      <nav className="sidebar">
+      <button className="sidebar-toggle" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+        <i className="fas fa-bars"></i>
+      </button>
+      <nav className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
         <div className="sidebar-header">
           <h2>Olá</h2>
           <p>@{user?.username || 'Usuário'}</p>
