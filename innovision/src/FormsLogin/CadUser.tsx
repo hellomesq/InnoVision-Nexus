@@ -17,24 +17,56 @@ const CadUser: React.FC = () => {
     setIsSignUp(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (isSignUp) {
-      // Simula o cadastro e armazena os dados no localStorage
-      localStorage.setItem('user', JSON.stringify({ username, email, password }));
-      localStorage.setItem('isLoggedIn', 'true');
-      navigate('/cad-auto'); // Navega para a página de cadastro de automóvel
+      // Requisição de cadastro
+      try {
+        const response = await fetch('http://localhost:5000/api/cadastro', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            senha: password,
+            confirmar_senha: password,
+            nome: username
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          localStorage.setItem('user', JSON.stringify(data.user_id));  // Salva apenas o ID do usuário
+          localStorage.setItem('isLoggedIn', 'true');
+          navigate('/cad-auto');  // Redireciona para a página de cadastro de automóvel
+        } else {
+          const errorData = await response.json();
+          alert(`Erro no cadastro: ${errorData.message}`);
+        }
+      } catch (error) {
+        alert('Erro de conexão com o servidor. Tente novamente mais tarde.');
+      }
     } else {
-      // Simula a verificação de login
-      const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
-      if (storedUser.email === email && storedUser.password === password) {
-        localStorage.setItem('isLoggedIn', 'true');
-        navigate('/perfil'); // Navega para a página de perfil
-      } else {
-        alert('Usuário ou senha incorretos');
+      // Requisição de login
+      try {
+        const response = await fetch('http://localhost:5000/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, senha: password }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          localStorage.setItem('user', JSON.stringify(data.user_id));  // Salva apenas o ID do usuário
+          localStorage.setItem('isLoggedIn', 'true');
+          navigate('/perfil');  // Redireciona para a página de perfil
+        } else {
+          const errorData = await response.json();
+          alert(`Erro no login: ${errorData.message}`);
+        }
+      } catch (error) {
+        alert('Erro de conexão com o servidor. Tente novamente mais tarde.');
       }
     }
   };
-
 
   return (
     <div className="centralizacao">
@@ -76,11 +108,11 @@ const CadUser: React.FC = () => {
           <form className='forms-cad'>
             <h1 className='title-forms'>Bem-vindo(a) de volta!</h1><br />
             <input
-              type="text"
+              type="email"
               className='input-cad'
-              placeholder="Usuário"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"

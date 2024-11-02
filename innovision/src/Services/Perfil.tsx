@@ -2,23 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './services.css';
 
-interface Repair {
-  date: string;
-  problem: string;
-  cost: string;
+interface User {
+  id: number;
+  nome: string;
+  email: string;
 }
 
-const repairs: Repair[] = [
-  { date: '2024-09-10', problem: 'Troca de óleo', cost: 'R$ 150,00' },
-  { date: '2024-09-05', problem: 'Substituição de pneus', cost: 'R$ 400,00' },
-  { date: '2024-09-01', problem: 'Reparação de freios', cost: 'R$ 250,00' },
-];
-
 const Perfil: React.FC = () => {
-  const [filterVisible, setFilterVisible] = useState(false);
-  const [dateFilter, setDateFilter] = useState('');
-  const [problemFilter, setProblemFilter] = useState('');
-  const [user, setUser] = useState<{ username: string } | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -27,23 +18,24 @@ const Perfil: React.FC = () => {
     if (!isLoggedIn) {
       navigate('/');
     } else {
-      const userData = JSON.parse(localStorage.getItem('user') || '{}');
-      setUser(userData);
+      const userId = JSON.parse(localStorage.getItem('user') || '{}');
+      fetchUserData(userId);
     }
-
-    const intervalId = setInterval(() => {
-      const updatedUser = JSON.parse(localStorage.getItem('user') || '{}');
-      setUser(updatedUser);
-    }, 1000);
-
-    return () => clearInterval(intervalId);
   }, [navigate]);
 
-  const filteredRepairs = repairs.filter(repair => {
-    const matchesDate = !dateFilter || repair.date === dateFilter;
-    const matchesProblem = !problemFilter || repair.problem === problemFilter;
-    return matchesDate && matchesProblem;
-  });
+  const fetchUserData = async (userId: string) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/user/${userId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data);  // Armazenar dados do usuário
+      } else {
+        alert('Erro ao buscar dados do usuário.');
+      }
+    } catch (error) {
+      alert('Erro de conexão com o servidor. Tente novamente mais tarde.');
+    }
+  };
 
   return (
     <div className="dashboard">
@@ -53,7 +45,7 @@ const Perfil: React.FC = () => {
       <nav className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
         <div className="sidebar-header">
           <h2>Olá</h2>
-          <p>@{user?.username || 'Usuário'}</p>
+          <p>{user ? `@${user.nome}` : 'Usuário'}</p>
         </div>
         <ul className="sidebar-menu">
           <li className="perfil"><a href="#">Perfil</a></li>
@@ -69,53 +61,7 @@ const Perfil: React.FC = () => {
               <p>Veja o registro das últimas manutenções do seu carro</p>
             </div>
           </div>
-          <div className='container-table'>
-            <div className="filter-container">
-              <h1>Histórico de manutenção</h1>
-              <button type="button" className="filter-btn" onClick={() => setFilterVisible(!filterVisible)}>
-                <i className="fa-solid fa-filter"></i>
-              </button>
-            </div>
-            {filterVisible && (
-              <div id="filter-form-container">
-                <form id="filter-form">
-                  <label htmlFor="filter-date">Data:</label>
-                  <input
-                    type="date"
-                    id="filter-date"
-                    name="date"
-                    value={dateFilter}
-                    onChange={(e) => setDateFilter(e.target.value)}
-                  />
-                  <label htmlFor="filter-problem">Manutenção:</label>
-                  <select
-                    id="filter-problem"
-                    name="problem"
-                    value={problemFilter}
-                    onChange={(e) => setProblemFilter(e.target.value)}
-                  >
-                    <option value="">Todos</option>
-                    <option value="Troca de óleo">Troca de óleo</option>
-                    <option value="Substituição de pneus">Substituição de pneus</option>
-                    <option value="Reparação de freios">Reparação de freios</option>
-                    <option value="Bateria">Bateria</option>
-                    <option value="Motor">Motor</option>
-                  </select>
-                  <button type="button" onClick={() => setFilterVisible(false)}>Aplicar</button>
-                </form>
-              </div>
-            )}
-            <div className="repair-cards">
-              {filteredRepairs.map((repair, index) => (
-                <div className="repair-card" key={index}>
-                  <h2>Ford Fiesta</h2>
-                  <p><strong>Data:</strong> {repair.date}</p>
-                  <p><strong>Manutenção:</strong> {repair.problem}</p>
-                  <p><strong>Custo:</strong> {repair.cost}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* O restante do seu componente aqui */}
         </div>
       </div>
     </div>
