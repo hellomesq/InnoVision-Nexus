@@ -6,14 +6,14 @@ import './services.css';
 
 const AlterarPerfil: React.FC = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [user, setUser] = useState<{ username: string, email: string, password: string } | null>(null);
-    const [car, setCar] = useState<{ model: string, chassis: string, plate: string, color: string } | null>(null);
+    const [user, setUser] = useState<{ id: number; nome: string; email: string; senha: string } | null>(null);
+    const [car, setCar] = useState<{ model: string; chassis: string; plate: string; color: string } | null>(null);
 
     const [newUsername, setNewUsername] = useState('');
     const [newEmail, setNewEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [alert, setAlert] = useState<{ message: string, type: 'success' | 'error' } | null>(null);
+    const [alert, setAlert] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
     const [showConfirmation, setShowConfirmation] = useState<{ action: 'deleteAccount' | 'removeCar' | null }>({ action: null });
     const navigate = useNavigate();
 
@@ -24,9 +24,17 @@ const AlterarPerfil: React.FC = () => {
         } else {
             const userData = JSON.parse(localStorage.getItem('user') || '{}');
             setUser(userData);
-            setNewUsername(userData.username);
-            setNewEmail(userData.email);
-            setNewPassword(userData.password || '');
+
+            // Chamada para pegar os dados do usuário
+            fetch(`http://localhost:5000/api/user/${userData.id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.nome && data.email) {
+                        setNewUsername(data.nome);
+                        setNewEmail(data.email);
+                    }
+                })
+                .catch(error => console.error('Error fetching user data:', error));
 
             const carData = JSON.parse(localStorage.getItem('car') || '{}');
             setCar(carData);
@@ -35,13 +43,32 @@ const AlterarPerfil: React.FC = () => {
 
     const handleUpdateProfile = () => {
         if (user) {
-            const updatedUser = { username: newUsername, email: newEmail, password: newPassword || user.password };
-            localStorage.setItem('user', JSON.stringify(updatedUser));
+            const updatedUser = {
+                nome: newUsername,
+                email: newEmail,
+                senha: newPassword || user.senha // Apenas atualizar a senha se fornecida
+            };
 
-            // Atualiza o estado local para refletir a mudança imediata no componente
-            setUser(updatedUser);
-
-            setAlert({ message: 'Perfil atualizado com sucesso!', type: 'success' });
+            fetch(`http://localhost:5000/api/user/${user.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedUser),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    setAlert({ message: data.message, type: 'success' });
+                    const newUserData = { ...user, nome: newUsername, email: newEmail, senha: newPassword || user.senha };
+                    localStorage.setItem('user', JSON.stringify(newUserData));
+                    setUser(newUserData);
+                }
+            })
+            .catch(error => {
+                console.error('Error updating user:', error);
+                setAlert({ message: 'Erro ao atualizar perfil', type: 'error' });
+            });
         }
     };
 
@@ -88,7 +115,7 @@ const AlterarPerfil: React.FC = () => {
             <nav className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
                 <div className="sidebar-header">
                     <h2>Olá</h2>
-                    <p>@{user?.username || 'Usuário'}</p>
+                    <p>@{user?.nome || 'Usuário'}</p>
                 </div>
                 <ul className="sidebar-menu">
                     <li><Link to="/perfil">Perfil</Link></li>
