@@ -26,7 +26,7 @@ const Services: React.FC = () => {
           <img src="../imagens/estimativacusto.jpg" alt="Foto Estimativa de Custo" />
           <h4 className="title-services-card">Estimativa de Custo</h4>
           <p className="desc-services-card">Obtenha uma estimativa precisa para planejar melhor seus gastos com manutenção.</p>
-          <br /><br /><Link to="/perfil" className="btn-services-card">Ver sobre</Link>
+          <br /><br /><Link to="/custos" className="btn-services-card">Ver sobre</Link>
         </div>
       </div>
       <div className="convitechat">

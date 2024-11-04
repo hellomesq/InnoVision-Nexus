@@ -5,6 +5,7 @@ import LandingPage from './LandingPage/LandingPage';
 import CadUser from './FormsLogin/CadUser';
 import CadAuto from './FormsLogin/CadAuto';
 import Services from './Services/Services';
+import Custos from './Services/Custos';
 import Perfil from './Services/Perfil';
 import AlterarPerfil from './Services/AlterarPerfi';
 import HeaderLogado from './Global/HeaderLogado';
@@ -53,6 +54,16 @@ const App: React.FC = () => {
             <>
               <Header />
               <Services />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/custos"
+          element={
+            <>
+              <Header />
+              <Custos/>
               <Footer />
             </>
           }

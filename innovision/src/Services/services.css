@@ -180,7 +180,7 @@
 .sidebar-menu li.perfil {
     position: relative;
     background: var(--secondgradient);
-    border-radius: 10px;
+    border-radius: 0 10px;
     color: white;
     padding: 6px 10px;
     cursor: pointer;
@@ -654,4 +654,73 @@
     .car-info p {
         font-size: 14px;
     }
+}
+
+/* PAGINA ESTIMATIVA DE CUSTOS */
+.custos {
+    padding: 80px 8% 60px; /* Padding superior para não ficar atrás da navbar */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+.custos h2 {
+    font-size: 28px;
+    color: #231838; /* Cor do título */
+    margin-bottom: 20px; /* Espaçamento inferior */
+    text-align: center; /* Centraliza o título */
+}
+
+.custos ul {
+    list-style-type: none; /* Remove os marcadores da lista */
+    padding: 0; /* Remove padding padrão */
+}
+
+.custos li {
+    padding: 10px; /* Espaçamento interno */
+    border-bottom: 1px solid #ddd; /* Linha de separação */
+}
+
+.custos li:last-child {
+    border-bottom: none; /* Remove a linha do último item */
+}
+
+.custos h3 {
+    font-size: 22px;
+    margin: 20px 0; /* Espaçamento superior e inferior */
+    text-align: center; /* Centraliza o preço da gasolina */
+}
+
+.custos form {
+    display: flex;
+    flex-direction: column; /* Organiza inputs em coluna */
+    align-items: center; /* Centraliza os inputs */
+}
+
+.custos input {
+    padding: 10px;
+    margin: 10px 0; /* Espaçamento entre input e botão */
+    border: 1px solid #ddd; /* Borda do input */
+    border-radius: 5px; /* Bordas arredondadas */
+    width: 100%; /* Ocupa toda a largura do contêiner */
+    max-width: 300px; /* Limita a largura máxima */
+}
+
+.custos button {
+    padding: 10px 20px;
+    border: none; /* Remove a borda padrão */
+    border-radius: 5px; /* Bordas arredondadas */
+    background-color: #4caf50; /* Cor do botão */
+    color: white; /* Cor do texto */
+    cursor: pointer; /* Cursor pointer ao passar o mouse */
+    transition: background-color 0.3s; /* Transição suave na cor */
+}
+
+.custos button:hover {
+    background-color: #45a049; /* Cor do botão ao passar o mouse */
+}
+
+.custos p {
+    margin-top: 20px; /* Espaçamento superior */
+    font-size: 18px; /* Tamanho da fonte */
+    color: #333; /* Cor do texto */
+    text-align: center; /* Centraliza a mensagem */
 }

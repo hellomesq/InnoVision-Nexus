@@ -18,53 +18,37 @@ const CadUser: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    if (isSignUp) {
-      // Requisição de cadastro
-      try {
-        const response = await fetch('http://localhost:5000/api/cadastro', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email,
-            senha: password,
-            confirmar_senha: password,
-            nome: username
-          }),
-        });
+    const endpoint = isSignUp ? 'http://localhost:5000/api/cadastro' : 'http://localhost:5000/api/login';
+    const body = isSignUp
+      ? JSON.stringify({
+          email,
+          senha: password,
+          confirmar_senha: password,
+          nome: username
+        })
+      : JSON.stringify({ email, senha: password });
 
-        if (response.ok) {
-          const data = await response.json();
-          localStorage.setItem('user', JSON.stringify(data.user_id));  // Salva apenas o ID do usuário
-          localStorage.setItem('isLoggedIn', 'true');
-          navigate('/cad-auto');  // Redireciona para a página de cadastro de automóvel
-        } else {
-          const errorData = await response.json();
-          alert(`Erro no cadastro: ${errorData.message}`);
-        }
-      } catch (error) {
-        alert('Erro de conexão com o servidor. Tente novamente mais tarde.');
-      }
-    } else {
-      // Requisição de login
-      try {
-        const response = await fetch('http://localhost:5000/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, senha: password }),
-        });
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: body,
+      });
 
-        if (response.ok) {
-          const data = await response.json();
-          localStorage.setItem('user', JSON.stringify(data.user_id));  // Salva apenas o ID do usuário
-          localStorage.setItem('isLoggedIn', 'true');
-          navigate('/perfil');  // Redireciona para a página de perfil
-        } else {
-          const errorData = await response.json();
-          alert(`Erro no login: ${errorData.message}`);
-        }
-      } catch (error) {
-        alert('Erro de conexão com o servidor. Tente novamente mais tarde.');
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('user', JSON.stringify(data.user_id));
+        localStorage.setItem('isLoggedIn', 'true');
+        console.log('Usuário logado:', data.user_id);
+
+        navigate(isSignUp ? '/cad-auto' : '/perfil');
+      } else {
+        alert(`Erro: ${data.message}`);
       }
+    } catch (error) {
+      console.error('Erro ao realizar a requisição:', error);
+      alert('Erro de conexão com o servidor. Tente novamente mais tarde.');
     }
   };
 
@@ -100,7 +84,7 @@ const CadUser: React.FC = () => {
               type="button"
               onClick={handleSubmit}
             >
-              {isSignUp ? 'Cadastrar-se' : 'Login'}
+              Cadastrar-se
             </button>
           </form>
         </div>
@@ -127,7 +111,7 @@ const CadUser: React.FC = () => {
               type="button"
               onClick={handleSubmit}
             >
-              {isSignUp ? 'Cadastrar-se' : 'Login'}
+              Login
             </button>
           </form>
         </div>

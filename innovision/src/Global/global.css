@@ -34,6 +34,15 @@
             #b64428 90%);
 }
 
+html, body {
+    height: 100%; /* Faz o body ocupar 100% da altura da tela */
+    display: flex;
+    flex-direction: column; /* Coloca todos os elementos em coluna */
+}
+
+body {
+    margin: 0; /* Remove margin padrão */
+}
 /* NAVBAR */
 
 header {
@@ -153,7 +162,10 @@ header {
     }
 
 }
-
+.main-content {
+    flex: 1; /* Faz o contêiner principal ocupar todo o espaço disponível */
+    padding-top: 80px; /* Espaço para a navbar */
+}
 
 /* RODAPÉ */
 
