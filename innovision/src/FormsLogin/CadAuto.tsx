@@ -1,60 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './forms.css';
 
 const CadAuto: React.FC = () => {
   const [model, setModel] = useState('');
-  const [chassis, setChassis] = useState('');
+  const [chassis, setChassis] = useState(''); // Este campo ainda existe, mas não é obrigatório
   const [plate, setPlate] = useState('');
-  const [color, setColor] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    if (!isLoggedIn) {
-      alert('Você precisa estar logado para cadastrar um automóvel.');
-      navigate('/login');
-    }
-  }, [navigate]);
 
   const handleRegister = async (event: React.FormEvent) => {
     event.preventDefault();
     setErrorMessage('');
 
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    if (!isLoggedIn) {
+    const userId = localStorage.getItem('user'); // Obtém o ID do usuário como string
+
+    if (!userId) {
       alert('Você precisa estar logado para cadastrar um automóvel.');
       return;
     }
 
     const carData = {
-      model,
-      chassis,
-      plate,
-      color,
+      modelo: model,         // Renomeado para 'modelo'
+      placa: plate,         // Renomeado para 'placa'
+      chassi: chassis || null,  // Chassi pode ser vazio, então usamos null se não fornecido
+      usuario_id: userId,   // Incluindo o ID do usuário
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/automoveis', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(carData),
-      });
-
-      if (response.ok) {
+      const response = await axios.post('http://localhost:5000/api/automoveis', carData);
+      if (response.status === 200) {
         console.log('Automóvel cadastrado com sucesso!');
-        // Você pode redirecionar ou notificar o sucesso aqui
-        navigate('/perfil'); // Redireciona para o perfil após cadastro
+        navigate('/perfil');
       } else {
-        const errorData = await response.json();
-        console.error('Erro ao cadastrar automóvel:', errorData);
         setErrorMessage("Ocorreu um erro ao cadastrar o automóvel.");
       }
     } catch (error) {
-      console.error("Erro de rede:", error);
+      console.error('Erro ao cadastrar automóvel:', error);
       setErrorMessage("Erro de conexão. Por favor, verifique sua internet.");
     }
   };
@@ -75,10 +58,9 @@ const CadAuto: React.FC = () => {
             <input
               type="text"
               className='input-cad'
-              placeholder="Chassi*"
+              placeholder="Chassi (opcional)"
               value={chassis}
               onChange={(e) => setChassis(e.target.value)}
-              required
             />
             <input
               type="text"
@@ -86,14 +68,6 @@ const CadAuto: React.FC = () => {
               placeholder="Placa*"
               value={plate}
               onChange={(e) => setPlate(e.target.value)}
-              required
-            />
-            <input
-              type="text"
-              className='input-cad'
-              placeholder="Coloração*"
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
               required
             />
             <button
